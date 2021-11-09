@@ -2625,7 +2625,7 @@
 											"top": 93,
 											"width": 124.64892578125,
 											"height": 13,
-											"text": "+hash: int",
+											"text": "+hash: String",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4013,7 +4013,7 @@
 								"$ref": "AAAAAAF84UTrVHQTpmA="
 							},
 							"name": "hash",
-							"type": "int"
+							"type": "String"
 						}
 					],
 					"operations": [
