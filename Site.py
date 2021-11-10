@@ -7,6 +7,7 @@ class Site:
         self.nom = nom
         self.localisation_ville = ville
         self.siege = isSiege
+        self.List_Person = []
 
     def get_name(self):
         return self.nom
@@ -27,4 +28,8 @@ class Site:
         self.siege = isSiege
 
     def to_string(self):
-        return f"[nom:{self.nom}; localisation:{self.localisation_ville}; siege:{self.siege}]"
+        return f"[nom:{self.nom}; localisation:{self.localisation_ville}; siege:{self.siege}] "
+
+    def add_person(self, person):
+        self.List_Person.append(person)
+

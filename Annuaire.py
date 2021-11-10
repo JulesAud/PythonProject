@@ -7,3 +7,6 @@ class Annuaire:
 
     def add_person(self, person):
         self.List_Persons.append(person)
+
+    def add_site(self, site):
+        self.List_Site.append(site)
