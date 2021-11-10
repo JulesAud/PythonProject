@@ -25,3 +25,6 @@ class Site:
 
     def set_isSiege(self, isSiege):
         self.siege = isSiege
+
+    def to_string(self):
+        return f"[nom:{self.nom}; localisation:{self.localisation_ville}; siege:{self.siege}]"
