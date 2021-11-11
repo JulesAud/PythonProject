@@ -17,10 +17,12 @@ class Annuaire:
 
     def research_person(self, attribut, valeur):
         """
-        Rechercher parmis toutes les personnes de l'annuaire les personnes répondant aux critère mis dans 'attribut' et 'valeur'.
+        Rechercher parmis toutes les personnes de l'annuaire les personnes répondant aux critère
+        mis dans 'attribut' et 'valeur'.
         :param attribut: String parmis (first_name, last_name, login, mail, site).
         :param valeur: String ou Site dans le cas où l'attribut est 'site'.
-        :return: String avec une liste écrite des personnes répondant au critère ou un message donnant les différents attributs.
+        :return: String avec une liste écrite des personnes répondant au critère ou un message
+        donnant les différents attributs.
         """
         sortie = "Résultat:\n"
         if 'first_name' == attribut:
