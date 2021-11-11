@@ -14,7 +14,6 @@ class Annuaire:
         :param person: Person
         """
         self.List_Persons.append(person)
-        self.List_Persons.sort()
 
     def research_person(self, attribut, valeur):
         """
@@ -24,7 +23,6 @@ class Annuaire:
         :return: String avec une liste écrite des personnes répondant au critère ou un message donnant les différents attributs.
         """
         sortie = "Résultat:\n"
-        self.List_Persons.sort()
         if 'first_name' == attribut:
             for p in self.List_Persons:
                 if p.first_name.startswith(valeur):
@@ -60,7 +58,6 @@ class Annuaire:
 
     def to_string(self):
         sortie = ""
-        self.List_Persons.sort()
         for p in self.List_Persons:
             sortie += f"- Nom: {p.last_name}, Prénom: {p.first_name}, Login: {p.login}, Mail: {p.mail}, " \
                       f"Workspace: {p.workspace.nom}\n"
