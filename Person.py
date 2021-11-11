@@ -45,6 +45,7 @@ class Person:
         self.workspace = workspace
         self.login = self.first_name[0] + self.last_name
         self.hash = self.get_hash()
+        self.mail = None
 
     def to_string(self):
         return f"[last_name:{self.last_name}; first_name:{self.first_name}; login:{self.login}; workspace:{self.workspace.to_string()}]"
