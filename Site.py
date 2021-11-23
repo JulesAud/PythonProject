@@ -9,4 +9,4 @@ class Site:
         self.isSiege = isSiege
 
     def to_string(self):
-        return f"[nom:{self.nom}; localisation:{self.localisation_ville}; siege:{self.siege}] "
+        return f"[nom:{self.nom}; localisation:{self.localisation_ville}; siege:{self.isSiege}] "
