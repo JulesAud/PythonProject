@@ -12,14 +12,32 @@ class Remote_admin(User):
     def _set_is_remote_admin(self,remote_admin):
         self._is_remote_admin = remote_admin
 
-    def random_char(self):
+    def _random_char(self):
         return os.urandom(3)
 
-    def create_user(self, first_name, last_name, workspace, mail, annuaire):
+    def _create_user(self, first_name, last_name, workspace, mail, annuaire):
         user = User(first_name, last_name, self.random_char(), workspace, mail)
-        if(user in annuaire):
+
+        if(user.login in annuaire):
             print("[Échec de Création] Impossible de créer l'utilisateur, ce dernier est déjà existant.")
         else:
-            annuaire.add_person(user)
+            annuaire.add_person(user.login)
             print("Utilisateur créer et ajouter à l'annuaire")
+
+    def _delete_user(self, login, annuaire):
+        if (not annuaire):
+            print("Vous ne pouvez pas supprimer des utilisateurs d'un annuaire vide")
+        else:
+            if(login in annuaire):
+                annuaire.pop(login)
+                print("Utilisateur supprimé avec succès !")
+            else:
+                print("Utilisateur non existant dans l'annuaire")
+
+    def _show_user_list(self, annuaire):
+        for x in annuaire:
+            print("User: "+ x)
+
+
+
 
