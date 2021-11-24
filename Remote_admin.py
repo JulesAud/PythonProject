@@ -13,16 +13,18 @@ class Remote_admin(User):
         self._is_remote_admin = remote_admin
 
     def _random_char(self):
-        return os.urandom(3)
+        password = os.urandom(3)
+        print(password)
+        return password
 
     def _create_user(self, first_name, last_name, workspace, mail, annuaire):
         user = User(first_name, last_name, self.random_char(), workspace, mail)
-
-        if(user.login in annuaire):
-            print("[Échec de Création] Impossible de créer l'utilisateur, ce dernier est déjà existant.")
-        else:
-            annuaire.add_person(user.login)
-            print("Utilisateur créer et ajouter à l'annuaire")
+        if self.workplace == user.workplace:
+            if(user.login in annuaire):
+                print("[Échec de Création] Impossible de créer l'utilisateur, ce dernier est déjà existant.")
+            else:
+                annuaire.add_person(user.login)
+                print("Utilisateur créer et ajouter à l'annuaire")
 
     def _delete_user(self, login, annuaire):
         if (not annuaire):
