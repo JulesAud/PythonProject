@@ -20,7 +20,7 @@ class Remote_admin(User):
     def _create_user(self, first_name, last_name, workspace, mail, annuaire):
         if self.workspace == workspace:
             user = User(first_name, last_name, self.random_char(), workspace, mail)
-            if(user in annuaire):
+            if(annuaire.research_login(user.login)):
                 print("[Échec de Création] Impossible de créer l'utilisateur, ce dernier est déjà existant.")
             else:
                 annuaire.add_person(user.login)
