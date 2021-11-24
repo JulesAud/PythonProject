@@ -1,4 +1,5 @@
 from Person import *
+from Person import Person
 
 
 class User:

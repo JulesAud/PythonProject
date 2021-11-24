@@ -15,6 +15,14 @@ class Annuaire:
         """
         self.List_Persons.append(person)
 
+    def research_login(self, login):
+        for p in self.List_Persons:
+            if p.get_login() == login:
+                return True
+        else:
+            return False
+
+
     def research_person(self, attribut, valeur):
         """
         Rechercher parmis toutes les personnes de l'annuaire les personnes répondant aux critère
