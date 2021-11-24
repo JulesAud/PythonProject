@@ -16,6 +16,11 @@ class Annuaire:
         self.List_Persons.append(person)
 
     def research_login(self, login):
+        """
+        Recherhcer si un login existe déjà dans l'annuaire.
+        :param login: valeur login à chercher
+        :return: True si le login existe, False si non.
+        """
         for p in self.List_Persons:
             if p.get_login() == login:
                 return True
