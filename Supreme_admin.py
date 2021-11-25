@@ -22,18 +22,19 @@ class Supreme_admin(Remote_admin):
         if(annuaire.research_login(remote_admin.login)):
             print("Impossible de créer le remote admin, ce dernier est déjà existant dans l'annuaire.")
         else:
-    ##annuaire.add_person()
+            annuaire.add_person(remote_admin)
             print("Remote admin créer avec succès.")
 
     def delete_remote_admin(self, login, annuaire):
-        if(not annuaire):
-            print("Erreur l'annuaire est vide")
-        else:
-            if (login in annuaire):
-                annuaire.pop(login)
+        if annuaire:
+            if (annuaire.research_login(login)):
+                person = annuaire.person_from_unique_attribute('login', login)
+                annuaire.pop(person)
                 print("Utilisateur supprimé avec succès !")
             else:
                 print("Utilisateur non existant dans l'annuaire")
+        else:
+            print("Erreur l'annuaire est vide")
 
     def set_is_supreme_admin(self,supreme_admin):
         self.__is_supreme_admin = supreme_admin
