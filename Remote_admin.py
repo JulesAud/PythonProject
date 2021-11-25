@@ -30,7 +30,7 @@ class Remote_admin(User):
         if (not annuaire):
             print("Vous ne pouvez pas supprimer des utilisateurs d'un annuaire vide")
         else:
-            if(login in annuaire):
+            if(login in annuaire and isinstance(login, User)):
                 annuaire.pop(login)
                 print("Utilisateur supprimé avec succès !")
             else:
