@@ -27,6 +27,27 @@ class Annuaire:
         else:
             return False
 
+    def person_from_unique_attribute(self, attribut, valeur):
+        """
+        Recherche si un login ou un mail existe, si oui retourne la personne à qui celui-ci appartient.
+        :param attribut: 'login' ou 'mail' -> attribut a chercher.
+        :param valeur: la valeur de l'attribut que tu cherches.
+        :return: retourne soit un objet Person si il a été trouvé, sinon retourne None.
+        """
+        if 'login' == attribut:
+            for p in self.List_Persons:
+                if p.get_login() == valeur:
+                    return p
+            else:
+                return None
+        elif 'mail' == attribut:
+            for p in self.List_Persons:
+                if p.get_mail() == valeur:
+                    return p
+            else:
+                return None
+        else:
+            print("l'attibut n'existe pas ou n'est pas utilisé dans cette fonction. Les attributs disponibles sont 'login' et 'mail'")
 
     def research_person(self, attribut, valeur):
         """
