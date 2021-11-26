@@ -1,17 +1,20 @@
+"""
+Import des bibliothèques python nécessaire à la création du programme
+"""
 import sys
-
 from Remote_admin import Remote_admin
 from Supreme_admin import *
 from Site import *
 from Annuaire import *
 
+"""
+
+"""
 site_paris = Site("Centre de Paris", "Paris", True)
 site_rennes = Site("Centre de Rennes", "Rennes", False)
 site_strasbourg = Site("Centre de Strasbourg", "Strasbourg", False)
 site_grenoble = Site("Centre de Grenoble", "Grenoble", False)
 
-
-# annuaire = []
 
 def home_page_user(user):
     print("Bonjour utilisateur : " + user.to_string())

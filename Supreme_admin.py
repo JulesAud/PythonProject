@@ -2,14 +2,40 @@ from Remote_admin import *
 
 
 class Supreme_admin(Remote_admin):
+    """
+    Classe instanciant le supreme administrateur qui possède tous les droits sur le logiciel.
+    Différentes méthodes de création et de suppression sont à sa portée. Il hérite directement de remote admin,
+    il possède donc les mêmes actions que ce dernier et d'autres en plus
+    """
+
     __is_supreme_admin = ""
+    #boolean qui permet de connaitre le statut du supreme admin
 
     def __init__(self, first_name, last_name, workplace, mail):
+        """
+        Constructeur de la classe Supreme admin qui va instancier un nouvel objet de ce type.
+        Nous faisons appel au constructeur de la classe mère afin de créer l'objet
+        :param first_name: prénom du supreme admin qui peut correspondre à n'importe quoi
+        :param last_name: nom du supreme admin qui peut correspondre lui aussi à n'importe quoi.
+        :param workplace: paramètre de type Site il permet de localiser le user en question selon son site
+        :param mail: mail du user
+        """
+
         Remote_admin.__init__(self, first_name, last_name, workplace, mail)
         self.__is_supreme_admin = True
         print(" User created : "+self.to_string())
 
     def create_user(self, first_name, last_name, workspace, mail, annuaire):
+        """
+        Méthode permettant de créer un nouvel user (sans rôle particulier ex: un salarié) peut importe son site.
+        Ne retourne rien par défaut.
+        :param first_name: prénom du user en question à créer
+        :param last_name: nom du user à créer
+        :param workspace: paramètre de type Site
+        :param mail:
+        :param annuaire:
+        :return: void
+        """
         user = User(first_name, last_name, self._random_char(), workspace, mail)
         if annuaire.research_login(user.get_login()):
             print("[Échec de Création] Impossible de créer l'utilisateur, ce dernier est déjà existant.")
