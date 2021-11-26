@@ -62,39 +62,51 @@ class Annuaire:
         if 'first_name' == attribut:
             for p in self.List_Persons:
                 if p.first_name.startswith(valeur):
-                    sortie += f"- Nom: {p.last_name}, Prénom: {p.first_name}, Login: {p.login}, Mail: {p.mail}, " \
-                              f"Workspace: {p.workspace.nom}\n"
+                    sortie += f"- Nom: {p.get_last_name()}, Prénom: {p.get_first_name()}, Login: {p.get_login()}, Mail: {p.get_mail()}, " \
+                              f"Workspace: {p.get_workspace().to_string()}\n"
             return sortie
         elif 'last_name' == attribut:
             for p in self.List_Persons:
                 if p.last_name.startswith(valeur):
-                    sortie += f"- Nom: {p.last_name}, Prénom: {p.first_name}, Login: {p.login}, Mail: {p.mail}, " \
-                              f"Workspace: {p.workspace.nom}\n"
+                    sortie += f"- Nom: {p.get_last_name()}, Prénom: {p.get_first_name()}, Login: {p.get_login()}, Mail: {p.get_mail()}, " \
+                              f"Workspace: {p.get_workspace().to_string()}\n"
             return sortie
         elif 'login' == attribut:
             for p in self.List_Persons:
                 if p.login.startswith(valeur):
-                    sortie += f"- Nom: {p.last_name}, Prénom: {p.first_name}, Login: {p.login}, Mail: {p.mail}, " \
-                              f"Workspace: {p.workspace.nom}\n"
+                    sortie += f"- Nom: {p.get_last_name()}, Prénom: {p.get_first_name()}, Login: {p.get_login()}, Mail: {p.get_mail()}, " \
+                              f"Workspace: {p.get_workspace().to_string()}\n"
             return sortie
         elif 'mail' == attribut:
             for p in self.List_Persons:
                 if p.mail.startswith(valeur):
-                    sortie += f"- Nom: {p.last_name}, Prénom: {p.first_name}, Login: {p.login}, Mail: {p.mail}, " \
-                              f"Workspace: {p.workspace.nom}\n"
+                    sortie += f"- Nom: {p.get_last_name()}, Prénom: {p.get_first_name()}, Login: {p.get_login()}, Mail: {p.get_mail()}, " \
+                              f"Workspace: {p.get_workspace().to_string()}\n"
             return sortie
         elif 'site' == attribut:
             for p in self.List_Persons:
-                if p.workspace == valeur:
-                    sortie += f"- Nom: {p.last_name}, Prénom: {p.first_name}, Login: {p.login}, Mail: {p.mail}, " \
-                              f"Workspace: {p.workspace.nom}\n"
+                if p.get_workspace() == valeur:
+                    sortie += f"- Nom: {p.get_last_name()}, Prénom: {p.get_first_name()}, Login: {p.get_login()}, Mail: {p.get_mail()}, " \
+                              f"Workspace: {p.get_workspace().to_string()}\n"
             return sortie
         else:
             return "L'attribut n'existe pas. Voici les attributs: (first_name, last_name, login, mail, site)."
 
     def to_string(self):
         sortie = ""
+
         for p in self.List_Persons:
-            sortie += f"- Nom: {p.last_name}, Prénom: {p.first_name}, Login: {p.login}, Mail: {p.mail}, " \
-                      f"Workspace: {p.workspace.nom}\n"
+            sortie += f"- Nom: {p.get_last_name()}, Prénom: {p.get_first_name()}, Login: {p.get_login()}, Mail: {p.get_mail()}, " \
+                      f"Workspace: {p.get_workspace().to_string()}, Hash: {p.get_hash()}\n"
         return sortie
+
+    def return_index_from_list(self, attribut, valeur):
+        if 'login' == attribut:
+            count=0
+            for p in self.List_Persons:
+                if p.get_login() == valeur:
+                    print(count)
+                    return count
+                count += 1;
+            else:
+                return None

@@ -15,13 +15,13 @@ site_grenoble = Site("Centre de Grenoble", "Grenoble", False)
 
 def home_page_user(user):
     print("Bonjour utilisateur : " + user.to_string())
-    choix_home_page_user = int(input("Pour vous déconnecter saisissez 0"))
+    choix_home_page_user = int(input("Pour vous déconnecter saisissez 0: "))
 
     while choix_home_page_user != 0:
         print("Cette action n'est pas supporté")
-        choix_home_page_user = int(input("Pour vous déconnecter saisissez 0"))
+        choix_home_page_user = int(input("Pour vous déconnecter saisissez 0: "))
 
-    menu()
+    menu(annuaire)
 
 
 def home_page_remote_admin(user, annuaire):
@@ -33,7 +33,7 @@ def home_page_remote_admin(user, annuaire):
                                              "\t -Saisissez 3 pour vous déconnecter\n" +
                                              "Votre choix : "))
 
-    while choix_home_page_remote_admin != 0 or choix_home_page_remote_admin != 1 or choix_home_page_remote_admin != 2 or choix_home_page_remote_admin != 3:
+    while choix_home_page_remote_admin not in [0,1,2,3]:
         print("Cette action n'est pas supportée")
         choix_home_page_remote_admin = int(input("Vos actions :\n" +
                                                  "\t -Saisissez 0 pour afficher la liste des utilisateurs présent dans votre lieu de travail\n" +
@@ -42,20 +42,20 @@ def home_page_remote_admin(user, annuaire):
                                                  "\t -Saisissez 3 pour vous déconnecter\n" +
                                                  "Votre choix : "))
 
-        if choix_home_page_remote_admin == 0:
-            user._show_user_list(annuaire)
+    if choix_home_page_remote_admin == 0:
+        print(annuaire.research_person('site', user.get_workspace()))
 
-        elif choix_home_page_remote_admin == 1:
-            inscription(user, annuaire)
+    elif choix_home_page_remote_admin == 1:
+        inscription(user, annuaire)
 
-        elif choix_home_page_remote_admin == 2:
-            login = str(input("Veuillez renseigner le login de l'utilisateur que vous souhaitez supprimer : "))
-            user._delete_user(login, annuaire)
+    elif choix_home_page_remote_admin == 2:
+        login = str(input("Veuillez renseigner le login de l'utilisateur que vous souhaitez supprimer : "))
+        user._delete_user(login, annuaire)
 
-        elif choix_home_page_remote_admin == 3:
-            print("Au revoir et à bientôt...")
-            menu()
-
+    elif choix_home_page_remote_admin == 3:
+        print("Au revoir et à bientôt...")
+        menu(annuaire)
+    home_page_remote_admin(user, annuaire)
 
 def home_page_supreme_admin(user, annuaire):
     print("Bonjour supreme admin : " + user.to_string())
@@ -68,7 +68,7 @@ def home_page_supreme_admin(user, annuaire):
                                              "\t -Saisissez 5 pour vous déconnecter\n" +
                                              "Votre choix : "))
 
-    while choix_home_page_supreme_admin != 0 or choix_home_page_supreme_admin != 1 or choix_home_page_supreme_admin != 2 or choix_home_page_supreme_admin != 3 or choix_home_page_supreme_admin != 4 or choix_home_page_supreme_admin != 5:
+    while choix_home_page_supreme_admin not in [0,1,2,3,4,5]:
         print("Cette action n'est pas supportée")
         choix_home_page_supreme_admin = int(input("Vos actions :\n" +
                                              "\t -Saisissez 0 pour afficher la liste de tous les utilisateurs\n" +
@@ -79,26 +79,27 @@ def home_page_supreme_admin(user, annuaire):
                                              "\t -Saisissez 5 pour vous déconnecter\n" +
                                              "Votre choix : "))
 
-        if choix_home_page_supreme_admin == 0:
-            user._show_user_list(annuaire)
+    if choix_home_page_supreme_admin == 0:
+        print(annuaire.to_string())
 
-        elif choix_home_page_supreme_admin == 1:
-            inscription(user, annuaire)
+    elif choix_home_page_supreme_admin == 1:
+        inscription(user, annuaire)
 
-        elif choix_home_page_supreme_admin == 2:
-            login = str(input("Veuillez renseigner le login de l'utilisateur que vous souhaitez supprimer : "))
-            user._delete_user(login, annuaire)
+    elif choix_home_page_supreme_admin == 2:
+        login = str(input("Veuillez renseigner le login de l'utilisateur que vous souhaitez supprimer : "))
+        user._delete_user(login, annuaire)
 
-        elif choix_home_page_supreme_admin == 3:
-            user.create_remote_admin()
+    elif choix_home_page_supreme_admin == 3:
+        inscription_remote_admin(user, annuaire)
 
-        elif choix_home_page_supreme_admin == 4:
-            user.delete_remote_admin()
+    elif choix_home_page_supreme_admin == 4:
+        login = str(input("Veuillez renseigner le login de l'utilisateur que vous souhaitez supprimer : "))
+        user.delete_remote_admin(login, annuaire)
 
-        elif choix_home_page_supreme_admin == 5:
-            print("Au revoir et à bientôt...")
-            menu()
-
+    elif choix_home_page_supreme_admin == 5:
+        print("Au revoir et à bientôt...")
+        menu(annuaire)
+    home_page_supreme_admin(user, annuaire)
 
 def inscription(admin, annuaire):
     nom_de_famille = str(input("Saisissez le nom de famille: "))
@@ -132,25 +133,48 @@ def inscription(admin, annuaire):
             print(annuaire)
 
 
+def inscription_remote_admin(admin, annuaire):
+    nom_de_famille = str(input("Saisissez le nom de famille: "))
+    prenom = str(input("Saisissez le prénom: "))
+    mail = str(input("Saisissez le mail: "))
+    workspace = ""
+
+    site = str(input("Saisissez \"Paris\", \"Rennes\", \"Strasbourg\" ou \"Grenoble\" pour le lieu du site: "))
+    if site.lower() == 'paris':
+        workspace = site_paris
+
+    elif site.lower() == 'rennes':
+        workspace = site_rennes
+
+    elif site.lower() == 'strasbourg':
+        workspace = site_strasbourg
+
+    elif site.lower() == 'grenoble':
+        workspace = site_grenoble
+
+    admin.create_remote_admin(prenom, nom_de_famille, workspace, mail, annuaire)
+    print("Remote admin créé avec succès\n")
+
+
 def connexion(annuaire):
     login = str(input("Veuillez saisir votre login : "))
     password = str(input("Veuillez saisir votre mot de passe : "))
 
     if annuaire.research_login(login):
         user = annuaire.person_from_unique_attribute('login', login)
-        hash = password.hash()
+        hash = sha256(password.encode("ascii")).hexdigest()
 
         if user.get_hash() == hash:
             print("Connexion réussi ! Bienvenue")
 
-            if isinstance(user, User):
-                home_page_user(user)
+            if isinstance(user, Supreme_admin):
+                home_page_supreme_admin(user, annuaire)
 
             elif isinstance(user, Remote_admin):
                 home_page_remote_admin(user, annuaire)
 
-            elif isinstance(user, Supreme_admin):
-                home_page_supreme_admin(user, annuaire)
+            elif isinstance(user, User):
+                home_page_user(user)
 
         else:
             print("Votre mot de passe contient une erreur veuillez réssayer !")
@@ -160,19 +184,7 @@ def connexion(annuaire):
 
     pass
 
-
-def modification():
-    pass
-
-
-def suppression():
-    pass
-
-
-def menu():
-    # Création des variables et des instances de départ afin de ne pas partir d'un annuaire vide est pouvoir tester
-    supreme_admin = Supreme_admin()
-    annuaire = Annuaire()
+def menu(annuaire):
 
     choix = int(input(
         "Bienvenue chez Team_Net\n- Saisir 1 pour se connecter\n- Saisir 2 pour quitter le système\nVotre choix: "))
@@ -190,4 +202,13 @@ def menu():
     sys.exit()
 
 
-menu()
+
+################## MAIN ##########################
+# Création des variables et des instances de départ afin de ne pas partir d'un annuaire vide est pouvoir tester
+supreme_admin = Supreme_admin("admin", "supreme", site_paris, "toto")
+annuaire = Annuaire()
+
+annuaire.add_person(supreme_admin)
+print(annuaire.to_string())
+
+menu(annuaire)

@@ -1,6 +1,9 @@
+from hashlib import sha256
+import hashlib
+
 class User:
     _login = ""
-    _hash = ""
+    _hash = ''
     _last_name = ""
     _first_name = ""
     _workspace = ""
@@ -15,7 +18,9 @@ class User:
 
     #########################
     def set_hash(self, password):
-        self._hash = password.hash()
+        if not isinstance(password, bytes):
+            password = password.encode("ascii")
+            self._hash = sha256(password).hexdigest()
 
     def get_hash(self):
         return self._hash
@@ -49,6 +54,7 @@ class User:
         return self._mail
 
     def __init__(self, first_name, last_name, password, workspace, mail):
+        print("Password is :"+ str(password))
         self.set_login(first_name[0].lower() + last_name.lower())
         self.set_hash(password)
         self._last_name = last_name  # nom de famille
@@ -57,4 +63,4 @@ class User:
         self._mail = mail
 
     def to_string(self):
-        return f"[login: {self._login}; last_name:{self._last_name}; first_name:{self._first_name}; workspace:{self._workspace.to_string()}; mail:{self._mail }]\n"
+        return f"[login: {self._login}; last_name:{self._last_name}; first_name:{self._first_name}; workspace:{self._workspace.to_string()}; mail:{self._mail }; hash :{self.get_hash()}]\n"
