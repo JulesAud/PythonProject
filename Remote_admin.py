@@ -26,7 +26,7 @@ class Remote_admin(User):
             if(annuaire.research_login(user.get_login())):
                 print("[Échec de Création] Impossible de créer l'utilisateur, ce dernier est déjà existant.")
             else:
-                annuaire.add_person(user.get_login())
+                annuaire.add_person(user)
                 print("Utilisateur créer et ajouter à l'annuaire")
 
     def _delete_user(self, login, annuaire):
