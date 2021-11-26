@@ -28,9 +28,9 @@ def home_page_remote_admin(user, annuaire):
     print("Bonjour remote admin : " + user.to_string())
     choix_home_page_remote_admin = int(input("Vos actions :\n" +
                                              "\t -Saisissez 0 pour afficher la liste des utilisateurs présent dans votre lieu de travail\n" +
-                                             "\t -Saisissez 1 pour créer un utilisateur dans votre site\n"+
-                                             "\t -Saisissez 2 pour effacer un utilisateur présent dans votre site\n"+
-                                             "\t -Saisissez 3 pour vous déconnecter\n"+
+                                             "\t -Saisissez 1 pour créer un utilisateur dans votre site\n" +
+                                             "\t -Saisissez 2 pour effacer un utilisateur présent dans votre site\n" +
+                                             "\t -Saisissez 3 pour vous déconnecter\n" +
                                              "Votre choix : "))
 
     while choix_home_page_remote_admin != 0 or choix_home_page_remote_admin != 1 or choix_home_page_remote_admin != 2 or choix_home_page_remote_admin != 3:
@@ -39,7 +39,7 @@ def home_page_remote_admin(user, annuaire):
                                                  "\t -Saisissez 0 pour afficher la liste des utilisateurs présent dans votre lieu de travail\n" +
                                                  "\t -Saisissez 1 pour créer un utilisateur dans votre site\n" +
                                                  "\t -Saisissez 2 pour effacer un utilisateur présent dans votre site\n"
-                                                 "\t -Saisissez 3 pour vous déconnecter\n"+
+                                                 "\t -Saisissez 3 pour vous déconnecter\n" +
                                                  "Votre choix : "))
 
         if choix_home_page_remote_admin == 0:
@@ -49,19 +49,55 @@ def home_page_remote_admin(user, annuaire):
             inscription(user, annuaire)
 
         elif choix_home_page_remote_admin == 2:
-            
+            login = str(input("Veuillez renseigner le login de l'utilisateur que vous souhaitez supprimer : "))
+            user._delete_user(login, annuaire)
 
         elif choix_home_page_remote_admin == 3:
             print("Au revoir et à bientôt...")
             menu()
 
 
-
-
-
-
 def home_page_supreme_admin(user, annuaire):
-    pass
+    print("Bonjour supreme admin : " + user.to_string())
+    choix_home_page_supreme_admin = int(input("Vos actions :\n" +
+                                             "\t -Saisissez 0 pour afficher la liste de tous les utilisateurs\n" +
+                                             "\t -Saisissez 1 pour créer un utilisateur dans un site\n" +
+                                             "\t -Saisissez 2 pour effacer un utilisateur\n" +
+                                             "\t -Saisissez 3 pour créer un remote admin\n" +
+                                             "\t -Saisissez 4 pour supprimer un remote admin\n" +
+                                             "\t -Saisissez 5 pour vous déconnecter\n" +
+                                             "Votre choix : "))
+
+    while choix_home_page_supreme_admin != 0 or choix_home_page_supreme_admin != 1 or choix_home_page_supreme_admin != 2 or choix_home_page_supreme_admin != 3 or choix_home_page_supreme_admin != 4 or choix_home_page_supreme_admin != 5:
+        print("Cette action n'est pas supportée")
+        choix_home_page_supreme_admin = int(input("Vos actions :\n" +
+                                             "\t -Saisissez 0 pour afficher la liste de tous les utilisateurs\n" +
+                                             "\t -Saisissez 1 pour créer un utilisateur dans un site\n" +
+                                             "\t -Saisissez 2 pour effacer un utilisateur\n" +
+                                             "\t -Saisissez 3 pour créer un remote admin\n" +
+                                             "\t -Saisissez 4 pour supprimer un remote admin\n" +
+                                             "\t -Saisissez 5 pour vous déconnecter\n" +
+                                             "Votre choix : "))
+
+        if choix_home_page_supreme_admin == 0:
+            user._show_user_list(annuaire)
+
+        elif choix_home_page_supreme_admin == 1:
+            inscription(user, annuaire)
+
+        elif choix_home_page_supreme_admin == 2:
+            login = str(input("Veuillez renseigner le login de l'utilisateur que vous souhaitez supprimer : "))
+            user._delete_user(login, annuaire)
+
+        elif choix_home_page_supreme_admin == 3:
+            user.create_remote_admin()
+
+        elif choix_home_page_supreme_admin == 4:
+            user.delete_remote_admin()
+
+        elif choix_home_page_supreme_admin == 5:
+            print("Au revoir et à bientôt...")
+            menu()
 
 
 def inscription(admin, annuaire):
@@ -85,7 +121,7 @@ def inscription(admin, annuaire):
             workspace = site_grenoble
 
         else:
-            print("Le siège saisi n'est pas correct veuillez recommencez la saisi")
+            print("Le siège saisi n'est pas correct veuillez recommencez la saisie")
             pass
 
         admin.create_user(prenom, nom_de_famille, workspace, mail, annuaire)

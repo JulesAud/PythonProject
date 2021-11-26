@@ -17,9 +17,11 @@ class Supreme_admin(Remote_admin):
             annuaire.add_person(user.login)
             print("Utilisateur créer et ajouter à l'annuaire.")
 
-    def create_remote_admin(self, first_name, last_name, workspace, mail,password,  annuaire):
+    def create_remote_admin(self, first_name, last_name, workspace, mail, annuaire):
+        password = self._random_char()
         remote_admin = Remote_admin(first_name, last_name, password, workspace, mail)
-        if annuaire.research_login(remote_admin.login):
+        print(f"login : {remote_admin.get_login()}, password : {password}")
+        if annuaire.research_login(remote_admin.get_login()):
             print("Impossible de créer le remote admin, ce dernier est déjà existant dans l'annuaire.")
         else:
             annuaire.add_person(remote_admin)
