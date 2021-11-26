@@ -93,6 +93,10 @@ class Annuaire:
             return "L'attribut n'existe pas. Voici les attributs: (first_name, last_name, login, mail, site)."
 
     def to_string(self):
+        """
+        Méthode retournant la liste de tous les utilisateurs de l'annuaire via chaîne de caractère
+        :return: la liste de tous les utilisateurs de l'annuaire via chaîne de caractère
+        """
         sortie = ""
 
         for p in self.List_Persons:
@@ -101,6 +105,12 @@ class Annuaire:
         return sortie
 
     def return_index_from_list(self, attribut, valeur):
+        """
+        Méthode permettant de retourner la position de l'élément dans la liste List_Annuaire
+        :param attribut: attribut permettant d'identifier l'élément à selectionner
+        :param valeur: valeur de l'attribut (ex: login, okilic)
+        :return: l'index de l'élément rechercher
+        """
         if 'login' == attribut:
             count=0
             for p in self.List_Persons:
