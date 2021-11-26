@@ -7,9 +7,7 @@ from Supreme_admin import *
 from Site import *
 from Annuaire import *
 
-"""
-
-"""
+#Initialisation des différents sites
 site_paris = Site("Centre de Paris", "Paris", True)
 site_rennes = Site("Centre de Rennes", "Rennes", False)
 site_strasbourg = Site("Centre de Strasbourg", "Strasbourg", False)
@@ -17,6 +15,10 @@ site_grenoble = Site("Centre de Grenoble", "Grenoble", False)
 
 
 def home_page_user(user):
+    """
+    affiche l'interface de l'utilisateur de base
+    :param user: utilisateur connecté
+    """
     print("Bonjour utilisateur : " + user.to_string())
     choix_home_page_user = int(input("Pour vous déconnecter saisissez 0: "))
 
@@ -28,6 +30,11 @@ def home_page_user(user):
 
 
 def home_page_remote_admin(user, annuaire):
+    """
+    affiche l'interface des remotes admins
+    :param user: administrateur distant connecté
+    :param annuaire: annuaire pour la lecture ou l'ajout/suppression d'utilisateur
+    """
     print("Bonjour remote admin : " + user.to_string())
     choix_home_page_remote_admin = int(input("Vos actions :\n" +
                                              "\t -Saisissez 0 pour afficher la liste des utilisateurs présent dans votre lieu de travail\n" +
@@ -61,6 +68,11 @@ def home_page_remote_admin(user, annuaire):
     home_page_remote_admin(user, annuaire)
 
 def home_page_supreme_admin(user, annuaire):
+    """
+    afficher l'interface du supreme admin
+    :param user: supreme admin connecté
+    :param annuaire: annuaire pour la lecture ou l'ajout/suppression d'utilisateur
+    """
     print("Bonjour supreme admin : " + user.to_string())
     choix_home_page_supreme_admin = int(input("Vos actions :\n" +
                                              "\t -Saisissez 0 pour afficher la liste de tous les utilisateurs\n" +
@@ -105,6 +117,12 @@ def home_page_supreme_admin(user, annuaire):
     home_page_supreme_admin(user, annuaire)
 
 def inscription(admin, annuaire):
+    """
+    Incrire un nouvel utilisateur. Verifie si l'admin est le supreme ou non, si oui propose de choisir le site
+    :param admin: admin connecté
+    :param annuaire: annuaire pour l'ajout d'utilisateur
+    :return:
+    """
     nom_de_famille = str(input("Saisissez le nom de famille: "))
     prenom = str(input("Saisissez le prénom: "))
     mail = str(input("Saisissez le mail: "))
@@ -137,6 +155,11 @@ def inscription(admin, annuaire):
 
 
 def inscription_remote_admin(admin, annuaire):
+    """
+    Inscrire un nouvel admin distant.
+    :param admin: supreme admin connecté
+    :param annuaire: annuaire pour la lecture ou l'ajout/suppression d'utilisateur
+    """
     nom_de_famille = str(input("Saisissez le nom de famille: "))
     prenom = str(input("Saisissez le prénom: "))
     mail = str(input("Saisissez le mail: "))
@@ -160,6 +183,10 @@ def inscription_remote_admin(admin, annuaire):
 
 
 def connexion(annuaire):
+    """
+    formulaire de connexion, vérification du login et du mot de passe hashé
+    :param annuaire: annuaire pour la lecture des information de l'utilisateur
+    """
     login = str(input("Veuillez saisir votre login : "))
     password = str(input("Veuillez saisir votre mot de passe : "))
 
@@ -188,7 +215,10 @@ def connexion(annuaire):
     pass
 
 def menu(annuaire):
-
+    """
+    Affichage du menu principal proposant la connexion ou l'arret du programme
+    :param annuaire: annuaire pour la lecture ou l'ajout/suppression d'utilisateur. Il sera transmis aux autres fonctions.
+    """
     choix = int(input(
         "Bienvenue chez Team_Net\n- Saisir 1 pour se connecter\n- Saisir 2 pour quitter le système\nVotre choix: "))
 
