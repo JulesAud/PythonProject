@@ -115,7 +115,6 @@ class Annuaire:
             count=0
             for p in self.List_Persons:
                 if p.get_login() == valeur:
-                    print(count)
                     return count
                 count += 1;
             else:

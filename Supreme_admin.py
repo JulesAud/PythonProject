@@ -24,7 +24,6 @@ class Supreme_admin(Remote_admin):
 
         Remote_admin.__init__(self, first_name, last_name, workplace, mail)
         self.__is_supreme_admin = True
-        print(" User created : " + self.to_string())
 
     def create_user(self, first_name, last_name, workspace, mail, annuaire):
         """
@@ -56,7 +55,6 @@ class Supreme_admin(Remote_admin):
         """
         password = self._random_char()
         remote_admin = Remote_admin(first_name, last_name, workspace, mail)
-        print(f"login : {remote_admin.get_login()}, password : {password}")
         if annuaire.research_login(remote_admin.get_login()):
             print("Impossible de créer le remote admin, ce dernier est déjà existant dans l'annuaire.")
         else:
