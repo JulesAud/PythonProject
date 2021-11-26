@@ -10,8 +10,8 @@ class Supreme_admin(Remote_admin):
         self.__is_supreme_admin = True
 
     def create_user(self, first_name, last_name, workspace, mail, annuaire):
-        user = User(first_name, last_name, self.random_char(), workspace, mail)
-        if (annuaire.research_login(user.login)):
+        user = User(first_name, last_name, self._random_char(), workspace, mail)
+        if annuaire.research_login(user.login):
             print("[Échec de Création] Impossible de créer l'utilisateur, ce dernier est déjà existant.")
         else:
             annuaire.add_person(user.login)
@@ -19,7 +19,7 @@ class Supreme_admin(Remote_admin):
 
     def create_remote_admin(self, first_name, last_name, workspace, mail,password,  annuaire):
         remote_admin = Remote_admin(first_name, last_name, password, workspace, mail)
-        if(annuaire.research_login(remote_admin.login)):
+        if annuaire.research_login(remote_admin.login):
             print("Impossible de créer le remote admin, ce dernier est déjà existant dans l'annuaire.")
         else:
             annuaire.add_person(remote_admin)
@@ -27,7 +27,7 @@ class Supreme_admin(Remote_admin):
 
     def delete_remote_admin(self, login, annuaire):
         if annuaire:
-            if (annuaire.research_login(login)):
+            if annuaire.research_login(login):
                 person = annuaire.person_from_unique_attribute('login', login)
                 annuaire.pop(person)
                 print("Utilisateur supprimé avec succès !")
